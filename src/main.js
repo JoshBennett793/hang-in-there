@@ -1,14 +1,21 @@
 // query selector variables go here 👇
 
+// POSTER //
 var mainPoster = document.querySelector('.main-poster');
 var posterImg = document.querySelector('.poster-img');
 var posterTitle = document.querySelector('.poster-title');
 var posterQuote = document.querySelector('.poster-quote');
 
+// BUTTONS //
 var randomPosterButton = document.querySelector('.show-random');
 var makePosterBtn = document.querySelector('.show-form');
+var showPosterBtn = document.querySelector('.make-poster');
 
+// FORM //
 var posterForm = document.querySelector('.poster-form');
+var imageInput = document.querySelector('#poster-image-url');
+var titleInput = document.querySelector('#poster-title');
+var quoteInput = document.querySelector('#poster-quote');
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -165,7 +172,11 @@ function changePosterQuote(quote) {
 }
 
 function renderRandomPoster() {
-  currentPoster = createPoster(getImageURL(images), getRandomTitle(titles), getRandomQuote(quotes));
+  currentPoster = createPoster(
+    getImageURL(images),
+    getRandomTitle(titles),
+    getRandomQuote(quotes),
+  );
 
   changePosterImg(currentPoster.imageURL);
   changePosterTitle(currentPoster.title);
@@ -178,4 +189,12 @@ function toggleMainPoster() {
 
 function toggleForm() {
   posterForm.classList.toggle('hidden');
+}
+
+function makeCustomPoster() {
+	return createPoster(
+		imageInput.value,
+		titleInput.value,
+		quoteInput.value
+	)
 }
