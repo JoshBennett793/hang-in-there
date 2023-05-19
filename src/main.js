@@ -124,25 +124,13 @@ randomPosterButton.addEventListener('click', renderRandomPoster);
 
 window.addEventListener('load', renderRandomPoster);
 
-makePosterBtn.addEventListener('click', () => {
-  toggleForm();
-  toggleMainPoster();
-});
+makePosterBtn.addEventListener('click', toggleMainAndForm);
 
-showSavedPostersBtn.addEventListener('click',() => {
-  toggleShowSavedPoster();
-  toggleMainPoster();
-});
+showMainBtn.addEventListener('click', toggleMainAndForm);
 
-backToMainBtn.addEventListener('click', () => {
-  toggleMainPoster();
-});
+showSavedPostersBtn.addEventListener('click', toggleMainAndSaved);
 
-showMainBtn.addEventListener('click', () => {
-  toggleMainPoster();
-});
-
-// backToMainBtn.addEventListener('click', backToMainBtnFunctionality);
+backToMainBtn.addEventListener('click', toggleMainAndSaved);
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -206,10 +194,12 @@ function toggleShowSavedPoster() {
   savedPostersSection.classList.toggle('hidden');
 }
 
-function toggleBackToMainBtn() {
-  backToMainBtn.classList.toggle('hidden');
+function toggleMainAndForm() {
+  toggleMainPoster();
+  toggleForm();
 }
 
-function toggleShowMainBtn() {
-  showMainBtn.classList.toggle('hidden');
+function toggleMainAndSaved() {
+  toggleMainPoster();
+  toggleShowSavedPoster();
 }
