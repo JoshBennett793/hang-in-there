@@ -209,6 +209,10 @@ function pushTitleToTitlesArray(title) {
 	titles.push(title);
 }
 
+function pushQuoteToQuotesArray(quote) {
+	quotes.push(quote);
+}
+
 function showMyPosterHandler(event) {
 	event.preventDefault();
 	
