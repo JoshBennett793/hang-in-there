@@ -1,9 +1,14 @@
 // query selector variables go here 👇
 
+var mainPoster = document.querySelector('.main-poster');
 var posterImg = document.querySelector('.poster-img');
 var posterTitle = document.querySelector('.poster-title');
 var posterQuote = document.querySelector('.poster-quote');
+
 var randomPosterButton = document.querySelector('.show-random');
+var makePosterBtn = document.querySelector('.show-form');
+
+var posterForm = document.querySelector('.poster-form');
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -112,6 +117,11 @@ randomPosterButton.addEventListener('click', renderRandomPoster);
 
 window.addEventListener('load', renderRandomPoster);
 
+makePosterBtn.addEventListener('click', () => {
+  toggleForm();
+  toggleMainPoster();
+});
+
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 function getRandomIndex(array) {
@@ -151,13 +161,21 @@ function changePosterTitle(title) {
 }
 
 function changePosterQuote(quote) {
-	posterQuote.innerText = quote;
+  posterQuote.innerText = quote;
 }
 
 function renderRandomPoster() {
   currentPoster = createPoster(getImageURL(images), getRandomTitle(titles), getRandomQuote(quotes));
 
-	changePosterImg(currentPoster.imageURL);
-	changePosterTitle(currentPoster.title);
-	changePosterQuote(currentPoster.quote);
+  changePosterImg(currentPoster.imageURL);
+  changePosterTitle(currentPoster.title);
+  changePosterQuote(currentPoster.quote);
+}
+
+function toggleMainPoster() {
+  mainPoster.classList.toggle('hidden');
+}
+
+function toggleForm() {
+  posterForm.classList.toggle('hidden');
 }
