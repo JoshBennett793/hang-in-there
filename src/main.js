@@ -205,6 +205,10 @@ function pushURLToImages(URL) {
 	images.push(URL);
 }
 
+function pushTitleToTitlesArray(title) {
+	titles.push(title);
+}
+
 function showMyPosterHandler(event) {
 	event.preventDefault();
 	
