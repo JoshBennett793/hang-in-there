@@ -194,18 +194,26 @@ function toggleForm() {
 }
 
 function makeCustomPoster() {
-  return createPoster(imageInput.value, titleInput.value, quoteInput.value);
+	return createPoster(
+		imageInput.value,
+		titleInput.value,
+		quoteInput.value
+	)
+}
+
+function pushURLToImages(URL) {
+	images.push(URL);
 }
 
 function showMyPosterHandler(event) {
-  event.preventDefault();
+	event.preventDefault();
+	
+	currentPoster = makeCustomPoster();
+	
+	toggleForm();
+	toggleMainPoster();
 
-  currentPoster = makeCustomPoster();
-
-  toggleForm();
-  toggleMainPoster();
-
-  changePosterImg(currentPoster.imageURL);
+	changePosterImg(currentPoster.imageURL);
   changePosterTitle(currentPoster.title);
   changePosterQuote(currentPoster.quote);
 }
