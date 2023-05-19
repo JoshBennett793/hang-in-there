@@ -129,6 +129,8 @@ makePosterBtn.addEventListener('click', () => {
   toggleMainPoster();
 });
 
+showPosterBtn.addEventListener('click', showMyPosterHandler);
+
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 function getRandomIndex(array) {
@@ -192,9 +194,18 @@ function toggleForm() {
 }
 
 function makeCustomPoster() {
-	return createPoster(
-		imageInput.value,
-		titleInput.value,
-		quoteInput.value
-	)
+  return createPoster(imageInput.value, titleInput.value, quoteInput.value);
+}
+
+function showMyPosterHandler(event) {
+  event.preventDefault();
+
+  currentPoster = makeCustomPoster();
+
+  toggleForm();
+  toggleMainPoster();
+
+  changePosterImg(currentPoster.imageURL);
+  changePosterTitle(currentPoster.title);
+  changePosterQuote(currentPoster.quote);
 }
