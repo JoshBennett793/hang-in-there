@@ -221,6 +221,10 @@ function showMyPosterHandler(event) {
 	toggleForm();
 	toggleMainPoster();
 
+	pushURLToImages(currentPoster.imageURL);
+	pushTitleToTitlesArray(currentPoster.title);
+	pushQuoteToQuotesArray(currentPoster.quote);
+
 	changePosterImg(currentPoster.imageURL);
   changePosterTitle(currentPoster.title);
   changePosterQuote(currentPoster.quote);
