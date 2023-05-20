@@ -17,6 +17,13 @@ var imageInput = document.querySelector('#poster-image-url');
 var titleInput = document.querySelector('#poster-title');
 var quoteInput = document.querySelector('#poster-quote');
 
+var showSavedPostersBtn = document.querySelector('.show-saved');
+var savedPostersSection = document.querySelector('.saved-posters');
+
+var backToMainBtn = document.querySelector('.back-to-main');
+
+var showMainBtn = document.querySelector('.show-main');
+
 // we've provided you with some data to work with 👇
 var images = [
   './assets/bees.jpg',
@@ -124,10 +131,13 @@ randomPosterButton.addEventListener('click', renderRandomPoster);
 
 window.addEventListener('load', renderRandomPoster);
 
-makePosterBtn.addEventListener('click', () => {
-  toggleForm();
-  toggleMainPoster();
-});
+makePosterBtn.addEventListener('click', toggleMainAndForm);
+
+showMainBtn.addEventListener('click', toggleMainAndForm);
+
+showSavedPostersBtn.addEventListener('click', toggleMainAndSaved);
+
+backToMainBtn.addEventListener('click', toggleMainAndSaved);
 
 showPosterBtn.addEventListener('click', showMyPosterHandler);
 
@@ -138,8 +148,8 @@ function getRandomIndex(array) {
 }
 
 function getImageURL(imgArray) {
-  var randomNum = getRandomIndex(imgArray);
-  return imgArray[randomNum];
+  var randomIndex = getRandomIndex(imgArray);
+  return imgArray[randomIndex];
 }
 
 function getRandomQuote(quoteArray) {
@@ -191,6 +201,20 @@ function toggleMainPoster() {
 
 function toggleForm() {
   posterForm.classList.toggle('hidden');
+}
+
+function toggleShowSavedPoster() {
+  savedPostersSection.classList.toggle('hidden');
+}
+
+function toggleMainAndForm() {
+  toggleMainPoster();
+  toggleForm();
+}
+
+function toggleMainAndSaved() {
+  toggleMainPoster();
+  toggleShowSavedPoster();
 }
 
 function makeCustomPoster() {
