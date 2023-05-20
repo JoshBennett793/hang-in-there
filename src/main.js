@@ -10,6 +10,9 @@ var posterQuote = document.querySelector('.poster-quote');
 var randomPosterButton = document.querySelector('.show-random');
 var makePosterBtn = document.querySelector('.show-form');
 var showPosterBtn = document.querySelector('.make-poster');
+var showMainBtn = document.querySelector('.show-main');
+var backToMainBtn = document.querySelector('.back-to-main');
+var showSavedPostersBtn = document.querySelector('.show-saved');
 
 // FORM //
 var posterForm = document.querySelector('.poster-form');
@@ -17,12 +20,9 @@ var imageInput = document.querySelector('#poster-image-url');
 var titleInput = document.querySelector('#poster-title');
 var quoteInput = document.querySelector('#poster-quote');
 
-var showSavedPostersBtn = document.querySelector('.show-saved');
+// SAVED POSTERS
 var savedPostersSection = document.querySelector('.saved-posters');
-
-var backToMainBtn = document.querySelector('.back-to-main');
-
-var showMainBtn = document.querySelector('.show-main');
+var savedPostersGrid = document.querySelector('.saved-posters-grid');
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -135,7 +135,10 @@ makePosterBtn.addEventListener('click', toggleMainAndForm);
 
 showMainBtn.addEventListener('click', toggleMainAndForm);
 
-showSavedPostersBtn.addEventListener('click', toggleMainAndSaved);
+showSavedPostersBtn.addEventListener('click', () => {
+	toggleMainAndSaved();
+	renderSavedPosters();
+});
 
 backToMainBtn.addEventListener('click', toggleMainAndSaved);
 
@@ -218,38 +221,48 @@ function toggleMainAndSaved() {
 }
 
 function makeCustomPoster() {
-	return createPoster(
-		imageInput.value,
-		titleInput.value,
-		quoteInput.value
-	)
+  return createPoster(imageInput.value, titleInput.value, quoteInput.value);
 }
 
 function pushURLToImages(URL) {
-	images.push(URL);
+  images.push(URL);
 }
 
 function pushTitleToTitlesArray(title) {
-	titles.push(title);
+  titles.push(title);
 }
 
 function pushQuoteToQuotesArray(quote) {
-	quotes.push(quote);
+  quotes.push(quote);
 }
 
 function showMyPosterHandler(event) {
-	event.preventDefault();
-	
-	currentPoster = makeCustomPoster();
-	
-	toggleForm();
-	toggleMainPoster();
+  event.preventDefault();
 
-	pushURLToImages(currentPoster.imageURL);
-	pushTitleToTitlesArray(currentPoster.title);
-	pushQuoteToQuotesArray(currentPoster.quote);
+  currentPoster = makeCustomPoster();
 
-	changePosterImg(currentPoster.imageURL);
+  toggleForm();
+  toggleMainPoster();
+
+  pushURLToImages(currentPoster.imageURL);
+  pushTitleToTitlesArray(currentPoster.title);
+  pushQuoteToQuotesArray(currentPoster.quote);
+
+  changePosterImg(currentPoster.imageURL);
   changePosterTitle(currentPoster.title);
   changePosterQuote(currentPoster.quote);
+}
+
+function renderSavedPosters() {
+  savedPostersGrid.innerHTML = '';
+
+  for (var i = 0; i < savedPosters.length; i++) {
+    savedPostersGrid.innerHTML += `
+		<article class="poster">
+      <img class="poster-img" id=${savedPosters[i].id} 
+				src="${savedPosters[i].imageURL}" alt="nothin' to see here">
+      <h1 class="poster-title">${savedPosters[i].title}</h1>
+      <h3 class="poster-quote">${savedPosters[i].quote}</h3>
+    </article>`;
+  }
 }
