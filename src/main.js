@@ -1,21 +1,28 @@
 // query selector variables go here 👇
 
+// POSTER //
 var mainPoster = document.querySelector('.main-poster');
 var posterImg = document.querySelector('.poster-img');
 var posterTitle = document.querySelector('.poster-title');
 var posterQuote = document.querySelector('.poster-quote');
 
+// BUTTONS //
 var randomPosterButton = document.querySelector('.show-random');
 var makePosterBtn = document.querySelector('.show-form');
+var showPosterBtn = document.querySelector('.make-poster');
 
+// FORM //
 var posterForm = document.querySelector('.poster-form');
+var imageInput = document.querySelector('#poster-image-url');
+var titleInput = document.querySelector('#poster-title');
+var quoteInput = document.querySelector('#poster-quote');
 
-var showSavedPostersBtn = document.querySelector('.show-saved')
-var savedPostersSection = document.querySelector('.saved-posters')
+var showSavedPostersBtn = document.querySelector('.show-saved');
+var savedPostersSection = document.querySelector('.saved-posters');
 
 var backToMainBtn = document.querySelector('.back-to-main');
 
-var showMainBtn = document.querySelector('.show-main') //Nevermind, take me back!
+var showMainBtn = document.querySelector('.show-main');
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -132,6 +139,8 @@ showSavedPostersBtn.addEventListener('click', toggleMainAndSaved);
 
 backToMainBtn.addEventListener('click', toggleMainAndSaved);
 
+showPosterBtn.addEventListener('click', showMyPosterHandler);
+
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 function getRandomIndex(array) {
@@ -175,7 +184,11 @@ function changePosterQuote(quote) {
 }
 
 function renderRandomPoster() {
-  currentPoster = createPoster(getImageURL(images), getRandomTitle(titles), getRandomQuote(quotes));
+  currentPoster = createPoster(
+    getImageURL(images),
+    getRandomTitle(titles),
+    getRandomQuote(quotes),
+  );
 
   changePosterImg(currentPoster.imageURL);
   changePosterTitle(currentPoster.title);
@@ -202,4 +215,41 @@ function toggleMainAndForm() {
 function toggleMainAndSaved() {
   toggleMainPoster();
   toggleShowSavedPoster();
+}
+
+function makeCustomPoster() {
+	return createPoster(
+		imageInput.value,
+		titleInput.value,
+		quoteInput.value
+	)
+}
+
+function pushURLToImages(URL) {
+	images.push(URL);
+}
+
+function pushTitleToTitlesArray(title) {
+	titles.push(title);
+}
+
+function pushQuoteToQuotesArray(quote) {
+	quotes.push(quote);
+}
+
+function showMyPosterHandler(event) {
+	event.preventDefault();
+	
+	currentPoster = makeCustomPoster();
+	
+	toggleForm();
+	toggleMainPoster();
+
+	pushURLToImages(currentPoster.imageURL);
+	pushTitleToTitlesArray(currentPoster.title);
+	pushQuoteToQuotesArray(currentPoster.quote);
+
+	changePosterImg(currentPoster.imageURL);
+  changePosterTitle(currentPoster.title);
+  changePosterQuote(currentPoster.quote);
 }
