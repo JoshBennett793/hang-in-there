@@ -10,8 +10,9 @@ var posterQuote = document.querySelector('.poster-quote');
 var randomPosterButton = document.querySelector('.show-random');
 var makePosterBtn = document.querySelector('.show-form');
 var showPosterBtn = document.querySelector('.make-poster');
-var showMainBtn = document.querySelector('.show-main');
 var backToMainBtn = document.querySelector('.back-to-main');
+var showMainBtn = document.querySelector('.show-main');
+var savePosterBtn = document.querySelector('.save-poster');
 var showSavedPostersBtn = document.querySelector('.show-saved');
 
 // FORM //
@@ -144,6 +145,8 @@ backToMainBtn.addEventListener('click', toggleMainAndSaved);
 
 showPosterBtn.addEventListener('click', showMyPosterHandler);
 
+savePosterBtn.addEventListener('click', saveThisPosterHandler);
+
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 function getRandomIndex(array) {
@@ -251,6 +254,23 @@ function showMyPosterHandler(event) {
   changePosterImg(currentPoster.imageURL);
   changePosterTitle(currentPoster.title);
   changePosterQuote(currentPoster.quote);
+}
+
+function saveThisPosterHandler() {
+  if (savedPosters.length === 0) {
+    savedPosters.push(currentPoster);
+    return
+  } 
+
+  for (var i = 0; i < savedPosters.length; i++) {
+    if (savedPosters[i].imageURL === currentPoster.imageURL
+      && savedPosters[i].title === currentPoster.title
+      && savedPosters[i].quotes === currentPoster.quotes) {
+        return
+      }
+    }
+
+  savedPosters.push(currentPoster);
 }
 
 function renderSavedPosters() {
