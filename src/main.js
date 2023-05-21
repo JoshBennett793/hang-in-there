@@ -128,17 +128,22 @@ var currentPoster;
 
 // event listeners go here 👇
 
-randomPosterButton.addEventListener('click', renderRandomPoster);
-
 window.addEventListener('load', renderRandomPoster);
+
+savedPostersGrid.addEventListener('dblclick', (event) => {
+	removePosterFromArray(event);
+	renderSavedPosters();
+});
+
+randomPosterButton.addEventListener('click', renderRandomPoster);
 
 makePosterBtn.addEventListener('click', toggleMainAndForm);
 
 showMainBtn.addEventListener('click', toggleMainAndForm);
 
 showSavedPostersBtn.addEventListener('click', () => {
-	toggleMainAndSaved();
-	renderSavedPosters();
+  toggleMainAndSaved();
+  renderSavedPosters();
 });
 
 backToMainBtn.addEventListener('click', toggleMainAndSaved);
@@ -259,16 +264,18 @@ function showMyPosterHandler(event) {
 function saveThisPosterHandler() {
   if (savedPosters.length === 0) {
     savedPosters.push(currentPoster);
-    return
-  } 
+    return;
+  }
 
   for (var i = 0; i < savedPosters.length; i++) {
-    if (savedPosters[i].imageURL === currentPoster.imageURL
-      && savedPosters[i].title === currentPoster.title
-      && savedPosters[i].quotes === currentPoster.quotes) {
-        return
-      }
+    if (
+      savedPosters[i].imageURL === currentPoster.imageURL 
+			&& savedPosters[i].title === currentPoster.title 
+			&& savedPosters[i].quotes === currentPoster.quotes
+    ) {
+      return;
     }
+  }
 
   savedPosters.push(currentPoster);
 }
@@ -278,11 +285,19 @@ function renderSavedPosters() {
 
   for (var i = 0; i < savedPosters.length; i++) {
     savedPostersGrid.innerHTML += `
-		<article class="poster">
-      <img class="poster-img" id=${savedPosters[i].id} 
-				src="${savedPosters[i].imageURL}" alt="nothin' to see here">
+		<article class="poster" id=${savedPosters[i].id}>
+      <img class="poster-img" src="${savedPosters[i].imageURL}" alt="nothin' to see here">
       <h1 class="poster-title">${savedPosters[i].title}</h1>
       <h3 class="poster-quote">${savedPosters[i].quote}</h3>
     </article>`;
   }
+}
+
+function removePosterFromArray(event) {
+	var poster = event.target.closest('article');
+	for (var i = 0; i < savedPosters.length; i++) {
+		if (savedPosters[i].id === parseInt(poster.id)) {
+			savedPosters.splice(savedPosters.indexOf(savedPosters[i]), 1)
+		}
+	}
 }
