@@ -295,7 +295,8 @@ function renderSavedPosters() {
 
 function removePosterFromArray(event) {
 	var poster = event.target.closest('article');
-	for (var i = 0; i < savedPosters.length; i++) {
+	
+  for (var i = 0; i < savedPosters.length; i++) {
 		if (savedPosters[i].id === parseInt(poster.id)) {
 			savedPosters.splice(savedPosters.indexOf(savedPosters[i]), 1)
 		}
