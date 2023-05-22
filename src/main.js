@@ -146,6 +146,8 @@ showSavedPostersBtn.addEventListener('click', () => {
   renderSavedPosters();
 });
 
+
+
 backToMainBtn.addEventListener('click', toggleMainAndSaved);
 
 showPosterBtn.addEventListener('click', showMyPosterHandler);
