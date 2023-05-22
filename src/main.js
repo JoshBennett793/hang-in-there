@@ -25,7 +25,7 @@ var quoteInput = document.querySelector('#poster-quote');
 var savedPostersSection = document.querySelector('.saved-posters');
 var savedPostersGrid = document.querySelector('.saved-posters-grid');
 
-// we've provided you with some data to work with 👇
+// POSTER DATA
 var images = [
   './assets/bees.jpg',
   './assets/bridge.jpg',
@@ -126,18 +126,15 @@ var quotes = [
 var savedPosters = [];
 var currentPoster;
 
-// event listeners go here 👇
+// EVENT LISTENERS
 
 window.addEventListener('load', renderRandomPoster);
-
-savedPostersGrid.addEventListener('dblclick', (event) => {
-	removePosterFromArray(event);
-	renderSavedPosters();
-});
 
 randomPosterButton.addEventListener('click', renderRandomPoster);
 
 makePosterBtn.addEventListener('click', toggleMainAndForm);
+
+showPosterBtn.addEventListener('click', showMyPoster);
 
 showMainBtn.addEventListener('click', toggleMainAndForm);
 
@@ -146,16 +143,16 @@ showSavedPostersBtn.addEventListener('click', () => {
   renderSavedPosters();
 });
 
-
+savedPostersGrid.addEventListener('dblclick', (event) => {
+	removePosterFromArray(event);
+	renderSavedPosters();
+});
 
 backToMainBtn.addEventListener('click', toggleMainAndSaved);
 
-showPosterBtn.addEventListener('click', showMyPosterHandler);
+savePosterBtn.addEventListener('click', saveThisPoster);
 
-savePosterBtn.addEventListener('click', saveThisPosterHandler);
-
-// functions and event handlers go here 👇
-// (we've provided two to get you started)!
+// FUNCTIONS AND EVENT HANDLERS
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
@@ -196,6 +193,12 @@ function changePosterQuote(quote) {
   posterQuote.innerText = quote;
 }
 
+function renderPoster() {
+  changePosterImg(currentPoster.imageURL);
+  changePosterTitle(currentPoster.title);
+  changePosterQuote(currentPoster.quote);
+}
+
 function renderRandomPoster() {
   currentPoster = createPoster(
     getImageURL(images),
@@ -203,9 +206,7 @@ function renderRandomPoster() {
     getRandomQuote(quotes),
   );
 
-  changePosterImg(currentPoster.imageURL);
-  changePosterTitle(currentPoster.title);
-  changePosterQuote(currentPoster.quote);
+	renderPoster();
 }
 
 function toggleMainPoster() {
@@ -230,10 +231,6 @@ function toggleMainAndSaved() {
   toggleShowSavedPoster();
 }
 
-function makeCustomPoster() {
-  return createPoster(imageInput.value, titleInput.value, quoteInput.value);
-}
-
 function pushURLToImages(URL) {
   images.push(URL);
 }
@@ -246,24 +243,26 @@ function pushQuoteToQuotesArray(quote) {
   quotes.push(quote);
 }
 
-function showMyPosterHandler(event) {
+function showMyPoster(event) {
   event.preventDefault();
 
-  currentPoster = makeCustomPoster();
+  currentPoster = createPoster(
+    imageInput.value,
+    titleInput.value,
+    quoteInput.value,
+  );
 
   toggleForm();
   toggleMainPoster();
-
+ 
   pushURLToImages(currentPoster.imageURL);
   pushTitleToTitlesArray(currentPoster.title);
   pushQuoteToQuotesArray(currentPoster.quote);
 
-  changePosterImg(currentPoster.imageURL);
-  changePosterTitle(currentPoster.title);
-  changePosterQuote(currentPoster.quote);
+  renderPoster();
 }
 
-function saveThisPosterHandler() {
+function saveThisPoster() {
   if (savedPosters.length === 0) {
     savedPosters.push(currentPoster);
     return;
@@ -271,9 +270,9 @@ function saveThisPosterHandler() {
 
   for (var i = 0; i < savedPosters.length; i++) {
     if (
-      savedPosters[i].imageURL === currentPoster.imageURL 
-			&& savedPosters[i].title === currentPoster.title 
-			&& savedPosters[i].quotes === currentPoster.quotes
+      savedPosters[i].imageURL === currentPoster.imageURL &&
+      savedPosters[i].title === currentPoster.title &&
+      savedPosters[i].quotes === currentPoster.quotes
     ) {
       return;
     }
@@ -296,11 +295,11 @@ function renderSavedPosters() {
 }
 
 function removePosterFromArray(event) {
-	var poster = event.target.closest('article');
-	
+  var poster = event.target.closest('article');
+
   for (var i = 0; i < savedPosters.length; i++) {
-		if (savedPosters[i].id === parseInt(poster.id)) {
-			savedPosters.splice(savedPosters.indexOf(savedPosters[i]), 1)
-		}
-	}
+    if (savedPosters[i].id === parseInt(poster.id)) {
+      savedPosters.splice(savedPosters.indexOf(savedPosters[i]), 1);
+    }
+  }
 }
