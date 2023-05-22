@@ -16,7 +16,7 @@ The user has the option to display a randomized motivational poster with a uniqu
 
 ### Preview of App:
  
- https://user-images.githubusercontent.com/127793213/239762910-c9c77ddd-2000-4e8d-87b3-161a1a226655.png
+ (https://user-images.githubusercontent.com/127793213/239766241-6fe281a5-5f17-4ac8-a521-00d4e086aa2e.png)
 
 ### Context:
 
@@ -48,7 +48,6 @@ Tech Stack
 - JavaScript
 
 ### Wins + Challenges:
-<<<<<<< Updated upstream
 [//]: <> (What are 2-3 wins you have from this project? What were some challenges you faced - and how did you get over them?)
 
 Wins
@@ -64,6 +63,3 @@ We solved this problem but writing a more verbose, albeit longer, conditional ex
 
 2. Since the git workflow and sometimes asynchronous nature of coding on the same project from two different timezones is so new to us, it took some time and a few iterations of pull requests to feel more comfortable with the dynamic of working on code that must also work together.
 The norm setting exercise really assisted in setting the general ground rules and work dynamic that would be shared while working on this project together, which acted as a guide for how we expected to work together.
-=======
-Understanding the format of an entire project was a huge win. As a cohort we have seen little pieces of code, but being able to see all of the code work together to create a functional app was incredible.
->>>>>>> Stashed changes
