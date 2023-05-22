@@ -16,7 +16,7 @@ The user has the option to display a randomized motivational poster with a uniqu
 
 ### Preview of App:
  
- (https://user-images.githubusercontent.com/127793213/239766241-6fe281a5-5f17-4ac8-a521-00d4e086aa2e.png)
+ ![preview screenshot](https://user-images.githubusercontent.com/127793213/239766241-6fe281a5-5f17-4ac8-a521-00d4e086aa2e.png)
 
 ### Context:
 
